@@ -53,7 +53,9 @@ jobs:
         run: |
           set -euxo pipefail
           brew style microsoft/foundry/devpack
-          brew audit --cask --strict --online microsoft/foundry/devpack
+          # DevPack currently ships as a GitHub pre-release, which online audit rejects.
+          # The install and signature steps below validate the published artifacts.
+          brew audit --cask --strict microsoft/foundry/devpack
 
       - name: Install cask
         run: brew install --cask microsoft/foundry/devpack

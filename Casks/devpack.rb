@@ -10,8 +10,7 @@ cask "devpack" do
   sha256 arm:   "1c811e5ad1419b2eca86847eab1ab3c26794fa39d5cd6457725ec9f6909ee197",
          intel: "fce048bc6dd4755d615d17efb0792e10945a22afa57e468944a1ffd51b68fbd7"
 
-  url "https://github.com/microsoft/foundry-toolkit/releases/download/devpack-installer-#{version}/foundry-devpack-osx-#{arch}.zip",
-      verified: "github.com/microsoft/foundry-toolkit/"
+  url "https://github.com/microsoft/foundry-toolkit/releases/download/devpack-installer-#{version}/foundry-devpack-osx-#{arch}.zip"
   name "Microsoft Foundry DevPack"
   desc "Tools for Microsoft Foundry development"
   homepage "https://github.com/microsoft/foundry-toolkit"
