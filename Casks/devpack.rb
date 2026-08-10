@@ -13,13 +13,17 @@ cask "devpack" do
   url "https://github.com/microsoft/foundry-toolkit/releases/download/devpack-installer-#{version}/foundry-devpack-osx-#{arch}.zip",
       verified: "github.com/microsoft/foundry-toolkit/"
   name "Microsoft Foundry DevPack"
-  desc "Foundry developer tools for your editor, terminal, and coding agent"
+  desc "Developer tools for Microsoft Foundry development with editors, terminals, and coding agents"
   homepage "https://github.com/microsoft/foundry-toolkit"
 
   depends_on formula: "azure-cli"
   depends_on macos: :ventura
 
   binary "foundry-devpack"
+
+  zap trash: [
+    "~/.local/state/foundry-devpack",
+  ]
 
   caveats <<~EOS
     Finish setting up your Foundry development environment:
@@ -30,8 +34,4 @@ cask "devpack" do
     the Microsoft Foundry Skill, Foundry Toolkit for VS Code, and Foundry Canvas.
     Re-run it at any time to verify or repair your environment.
   EOS
-
-  zap trash: [
-    "~/.local/state/foundry-devpack",
-  ]
 end

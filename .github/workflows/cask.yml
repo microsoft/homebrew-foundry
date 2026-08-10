@@ -1,0 +1,85 @@
+name: Cask CI
+
+on:
+  pull_request:
+    paths:
+      - "Casks/**"
+      - ".github/workflows/cask.yml"
+  push:
+    branches: [main]
+    paths:
+      - "Casks/**"
+      - ".github/workflows/cask.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FOUNDRY_DEVPACK_COLLECT_TELEMETRY: "false"
+  HOMEBREW_GITHUB_API_TOKEN: ${{ github.token }}
+  HOMEBREW_NO_ANALYTICS: "1"
+  HOMEBREW_NO_AUTO_UPDATE: "1"
+  GITHUB_TOKEN: ${{ github.token }}
+
+jobs:
+  test:
+    name: ${{ matrix.arch }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            arch: arm64
+          - os: macos-15-intel
+            arch: x64
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Register local tap
+        run: |
+          set -euxo pipefail
+          tap_dir="$(brew --repository)/Library/Taps/microsoft/homebrew-foundry"
+          mkdir -p "$(dirname "$tap_dir")"
+          rm -rf "$tap_dir"
+          ln -s "$GITHUB_WORKSPACE" "$tap_dir"
+          brew tap | grep -qx "microsoft/foundry"
+
+      - name: Style and audit
+        run: |
+          set -euxo pipefail
+          brew style microsoft/foundry/devpack
+          brew audit --cask --strict --online microsoft/foundry/devpack
+
+      - name: Install cask
+        run: brew install --cask microsoft/foundry/devpack
+
+      - name: Verify binary and signature
+        run: |
+          set -euxo pipefail
+          foundry-devpack --version | grep -F "0.1.1"
+          foundry-devpack --help
+          binary="$(realpath "$(command -v foundry-devpack)")"
+          codesign --verify --strict --verbose=2 "$binary"
+
+      - name: Provision Foundry environment
+        run: foundry-devpack install
+
+      - name: Verify provisioned tools
+        run: |
+          set -euxo pipefail
+          az version
+          azd version
+          azd ext list --installed | grep -qi "microsoft\.foundry"
+          test -f "$HOME/.agents/skills/microsoft-foundry/SKILL.md"
+
+      - name: Uninstall cask
+        run: |
+          set -euxo pipefail
+          brew uninstall --zap --cask microsoft/foundry/devpack
+          ! command -v foundry-devpack
+          test -f "$HOME/.agents/skills/microsoft-foundry/SKILL.md"
