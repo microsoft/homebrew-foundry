@@ -21,9 +21,7 @@ cask "devpack" do
 
   binary "foundry-devpack"
 
-  zap trash: [
-    "~/.local/state/foundry-devpack",
-  ]
+  zap trash: "~/.local/state/foundry-devpack"
 
   caveats <<~EOS
     Finish setting up your Foundry development environment:
