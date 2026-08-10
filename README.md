@@ -1,14 +1,36 @@
-# Project
+# Microsoft Foundry DevPack Homebrew Tap
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+This repository is the official Homebrew tap for
+[Microsoft Foundry DevPack](https://github.com/microsoft/foundry-toolkit). DevPack prepares a
+macOS development environment with Foundry tools for editors, terminals, and coding agents.
 
-As the maintainer of this project, please make a few updates:
+## Install
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+Run the cask installation and environment setup as one command:
+
+```bash
+brew install --cask microsoft/foundry/devpack && foundry-devpack install
+```
+
+To disable anonymous DevPack telemetry for the setup command, use:
+
+```bash
+brew install --cask microsoft/foundry/devpack && foundry-devpack install --no-telemetry
+```
+
+To disable DevPack telemetry for all future runs, set
+`FOUNDRY_DEVPACK_COLLECT_TELEMETRY=false` in your shell environment.
+
+Homebrew automatically adds the `microsoft/foundry` tap. The cask installs the signed and
+notarized DevPack CLI and its Azure CLI dependency. The follow-up command installs Azure Developer
+CLI (`azd`) and enables `azd ai`, then installs the Microsoft Foundry Skill and sets up the Foundry
+Toolkit for Visual Studio Code and Foundry Canvas when their host applications are available.
+
+## Support
+
+- For Homebrew packaging problems, DevPack or Foundry Toolkit problems, open an issue in
+  [microsoft/foundry-toolkit](https://github.com/microsoft/foundry-toolkit/issues).
+- To report a security vulnerability, follow [Microsoft's security guidance](SECURITY.md).
 
 ## Contributing
 

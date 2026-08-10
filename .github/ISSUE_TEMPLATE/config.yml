@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Microsoft Foundry DevPack support
+    url: https://github.com/microsoft/foundry-toolkit/issues/new/choose
+    about: Report Homebrew packaging, DevPack, and Foundry Toolkit issues in the main repository.
+  - name: Report a security vulnerability
+    url: https://aka.ms/SECURITY.md
+    about: Follow Microsoft's guidance for reporting security vulnerabilities privately.
