@@ -13,7 +13,7 @@ cask "devpack" do
   url "https://github.com/microsoft/foundry-toolkit/releases/download/devpack-installer-#{version}/foundry-devpack-osx-#{arch}.zip",
       verified: "github.com/microsoft/foundry-toolkit/"
   name "Microsoft Foundry DevPack"
-  desc "Developer tools for Microsoft Foundry development with editors, terminals, and coding agents"
+  desc "Tools for Microsoft Foundry development"
   homepage "https://github.com/microsoft/foundry-toolkit"
 
   depends_on formula: "azure-cli"
