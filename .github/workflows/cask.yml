@@ -63,7 +63,8 @@ jobs:
       - name: Verify binary and signature
         run: |
           set -euxo pipefail
-          foundry-devpack --version | grep -F "0.1.1"
+          expected_version="$(brew info --cask --json=v2 microsoft/foundry/devpack | jq -r '.casks[0].version')"
+          foundry-devpack --version | grep -F "$expected_version"
           foundry-devpack --help
           binary="$(realpath "$(command -v foundry-devpack)")"
           codesign --verify --strict --verbose=2 "$binary"
