@@ -6,14 +6,14 @@
 cask "devpack" do
   arch arm: "arm64", intel: "x64"
 
-  version "0.1.2"
-  sha256 arm:   "0968144b7267b40512e3aaef84dea17b609f9b54f090bd799359ba457b9c14a3",
-         intel: "6a4d23bdd2264443850f13af7812d508bbc4a117ed396d9ac97d9998cd64fdd4"
+  version "0.1.3"
+  sha256 arm:   "e7a14534a650a102b85e58caf41dfecfcbddf29921fdfab5f7f4f1539fafb43b",
+         intel: "c559d399b7a68a90fe422abbc033c0e83fef911d7e91031ab29706da4acb242a"
 
-  url "https://github.com/microsoft/foundry-toolkit/releases/download/devpack-installer-#{version}/foundry-devpack-osx-#{arch}.zip"
+  url "https://github.com/microsoft/foundry-dev-tools/releases/download/devpack-installer-#{version}/foundry-devpack-osx-#{arch}.zip"
   name "Microsoft Foundry DevPack"
   desc "Tools for Microsoft Foundry development"
-  homepage "https://github.com/microsoft/foundry-toolkit"
+  homepage "https://github.com/microsoft/foundry-dev-tools"
 
   depends_on formula: "azure-cli"
   depends_on macos: :ventura
