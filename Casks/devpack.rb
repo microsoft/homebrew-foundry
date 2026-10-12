@@ -15,7 +15,7 @@ cask "devpack" do
   desc "Tools for Microsoft Foundry development"
   homepage "https://github.com/microsoft/foundry-dev-tools"
 
-  depends_on formula: "azure-cli"
+  depends_on cask: "azure-cli"
   depends_on macos: :ventura
 
   binary "foundry-devpack"
