@@ -40,6 +40,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
+      - name: Refresh Homebrew metadata
+        run: brew update
+
       - name: Register local tap
         run: |
           set -euxo pipefail
