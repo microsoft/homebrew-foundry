@@ -51,6 +51,7 @@ jobs:
           rm -rf "$tap_dir"
           ln -s "$GITHUB_WORKSPACE" "$tap_dir"
           brew tap | grep -qx "microsoft/foundry"
+          brew trust --cask microsoft/foundry/devpack
 
       - name: Style and audit
         run: |
